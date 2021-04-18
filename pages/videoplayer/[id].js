@@ -54,11 +54,15 @@ export default function videoplayer({video}) {
               </InputAdornment>
             }} />
           <List>
-            {video.bookmarks.map(bookmark=> (
-              <ListItem button>
-                <ListItemText primary={`${bookmark.time} => ${bookmark.note}`} />
-              </ListItem>
-            ))}
+            {video.bookmarks.map(bookmark=> {
+              const min = Math.floor(bookmark.time / 60)
+              const sec = Math.floor(bookmark.time - min * 60)
+              return (
+                <ListItem button>
+                  <ListItemText primary={`${min}:${sec} - ${bookmark.note}`} />
+                </ListItem>
+              )
+            })}
             <Divider />
           </List>
         </Grid>
