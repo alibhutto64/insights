@@ -1,4 +1,5 @@
 import { connectToDatabase } from "../../util/mongodb";
+import AddAyah from "../../components/AddAyah"
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -39,6 +40,8 @@ export default function quran( {quran} ) {
   const classes = useStyles();
 
   return(
+    <div>
+    <AddAyah />
     <List className={classes.root}>
       {quran.map((ayat, index)=> {
         return (
@@ -47,16 +50,17 @@ export default function quran( {quran} ) {
               <ListItemIcon>
                 <div className={classes.reference}><Typography variant="subtitle1">{ayat.surah}:{ayat.aya}</Typography></div>
               </ListItemIcon>
-              <ListItemText className={classes.note} inset="true" primary={ayat.note} secondary='Say (O Muhammad SAW to mankind): "If you (really) love Allah then follow me (i.e. accept Islamic Monotheism, follow the Quran and the Sunnah), Allah will love you and forgive you of your sins. And Allah is Oft-Forgiving, Most Merciful."'/>
+              <ListItemText className={classes.note} inset="true" primary={ayat.note} secondary={ayat.trans[0]}/>
             </ListItem>
             <ButtonGroup>
               <Button variant="contained" classes={{ root: classes.edit}}>Edit</Button>
-              <Button variant="contained" color="primary">Tafseer</Button>
+              <Button variant="contained" color="primary" href={`https://javedahmedghamidi.org/#!/quran?chapter=${ayat.surah}&paragraph=${ayat.para}&type=Ghamidi`}>Tafseer</Button>
             </ButtonGroup>
           </Paper>
         )
       })}
     </List>
+    </div>
   )
 }
 
