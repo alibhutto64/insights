@@ -3,8 +3,6 @@ import { getLinkPreview } from 'link-preview-js'
 const got = require('got');
 const cheerio = require('cheerio');
 const tunnel = require('tunnel');
-import youtube from "scrape-youtube"
-const { HttpsProxyAgent } = require('hpagent')
 
 export default async function metadata(req,res) {
 
@@ -38,9 +36,9 @@ export default async function metadata(req,res) {
 
 	else if(req.body.type == 'video')  {
 	  let videoData
-	  let tunnelingAgent = tunnel.httpOverHttp({
+	  let tunnelingAgent = tunnel.httpsOverHttp({
 		  proxy: {
-			  host: '172.26.64.1',
+			  host: 'localhost',
 			  port: 8889
 		  }
 	  });
@@ -49,10 +47,9 @@ export default async function metadata(req,res) {
 			console.log(req.body)
 			const response = await got(`https://www.youtube.com/watch?v=${req.body.videoId}`, {
 				agent: {
-					http: tunnelingAgent
+					https: tunnelingAgent
 				}
 			});
-			console.log(response.body)
 			const $ = cheerio.load(response.body);
 
 			videoData = {
@@ -64,7 +61,6 @@ export default async function metadata(req,res) {
 				bookmarks: []
 			}
 			console.log(videoData)
-			console.log("last line");
 		}
 		catch(e) {
 			console.log(e.response.body)
@@ -73,11 +69,11 @@ export default async function metadata(req,res) {
 
 		res.send('what')
 		
-		// inserting it to database
-		// const { db } = await connectToDatabase();
-		// const videos = await db.collection("videos")
-		// const result = await videos.insertOne(videoData)
+		// insert to database
+		const { db } = await connectToDatabase();
+		const videos = await db.collection("videos")
+		const result = await videos.insertOne(videoData)
 
-		// res.send(result.insertedCount)
+		res.send(result)
 	}
 }

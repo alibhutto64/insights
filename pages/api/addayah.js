@@ -1,22 +1,5 @@
 import { connectToDatabase } from "../../util/mongodb";
 
-/* surah, aya, note 
-    aya
-:33
-note
-:"5 things that are forbidden in islam"
-surah
-:7
-time
-:1608419255494
-trans
-:
-Array
-para
-:6
-
-*/
-
 export default async function addayah(req, res) {
 
     let ayah = {

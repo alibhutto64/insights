@@ -40,12 +40,12 @@ export default function videoplayer({video}) {
   }
 
   return (
-    <Container maxWidth="lg">
-      <Grid container>
-        <Grid item lg="8">
-          <ReactPlayer ref={(player)=>setPlayer(player)} url={`https://www.youtube.com/watch?v=${id}`} controls='true'/>
+    <Container maxWidth="md">
+      <Grid spacing="1" container>
+        <Grid item md="8">
+          <ReactPlayer width="100%" height="60vh" ref={(player)=>setPlayer(player)} url={`https://www.youtube.com/watch?v=${id}`} controls='true'/>
         </Grid>
-        <Grid item lg='4'>
+        <Grid item md='4'>
             <TextField onChange={(e)=>{setNote(e.target.value)}} style={{width: '100%'}} label="Bookmark" variant="outlined" InputProps={{
               endAdornment: <InputAdornment position="end">
                 <IconButton onClick={handleBookmark} aria-label="bookmark">

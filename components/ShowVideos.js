@@ -11,11 +11,14 @@ import Link from 'next/link'
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: '15px 10px',
-    marginBottom: '30px'
+    marginBottom: '30px',
+    display: 'flex',
+    justifyContent: 'center',
   },
   videoCard: {
-    maxWidth: 345,
-    marginTop: '10px'
+    maxWidth: '23vw',
+    marginTop: '10px',
+    marginRight: '10px'
   },
 }));
 
@@ -31,12 +34,12 @@ export default function ShowVideos(props) {
                 <CardMedia
                   component="img"
                   alt="Contemplative Reptile"
-                  height="140"
+                  height="160"
                   image={video.image}
                   title={video.title}
                 />
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="subtitle2">
                     {video.title}
                   </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
