@@ -6,7 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';;
 import Link from 'next/link'
-import AddVideo from './AddVideo'
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,7 +24,6 @@ export default function ShowVideos(props) {
 
   return(
     <Paper elevation={3} className={classes.paper}>
-        <AddVideo cat="programming"/>
         {props.videos.map(video=> (
           <Link href={`/videoplayer/${video.videoId}`}>
             <Card className={classes.videoCard}>

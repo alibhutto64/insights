@@ -3,6 +3,8 @@ import { getLinkPreview } from 'link-preview-js'
 const got = require('got');
 const cheerio = require('cheerio');
 const tunnel = require('tunnel');
+import youtube from "scrape-youtube"
+const { HttpsProxyAgent } = require('hpagent')
 
 export default async function metadata(req,res) {
 
@@ -35,30 +37,47 @@ export default async function metadata(req,res) {
 	}
 
 	else if(req.body.type == 'video')  {
+	  let videoData
+	  let tunnelingAgent = tunnel.httpOverHttp({
+		  proxy: {
+			  host: '172.26.64.1',
+			  port: 8889
+		  }
+	  });
 		//getting all video data
-		const response = await got(`https://www.youtube.com/watch?v=${req.body.videoId}`, {
-			agent: { https: tunnel.httpsOverHttp({
-					proxy: {
-						host: 'localhost',
-						port: '8888'
-					}
-				})
-			}
-		});
-		const $ = cheerio.load(response.body);
-		const videoData = {
-			videoId: req.body.videoId,
-			cat: req.body.cat,
-			title: $("meta[property='og:title']").attr('content'),
-			image: $("meta[property='og:image']").attr('content'),
-			desc: $("meta[property='og:description']").attr('content'),
-			bookmarks: []
-		}
-		// inserting it to database
-		const { db } = await connectToDatabase();
-		const videos = await db.collection("videos")
-		const result = await videos.insertOne(videoData)
+		try {
+			console.log(req.body)
+			const response = await got(`https://www.youtube.com/watch?v=${req.body.videoId}`, {
+				agent: {
+					http: tunnelingAgent
+				}
+			});
+			console.log(response.body)
+			const $ = cheerio.load(response.body);
 
-		res.send(result.insertedCount)
+			videoData = {
+				videoId: req.body.videoId,
+				cat: req.body.cat,
+				title: $("meta[property='og:title']").attr('content'),
+				image: $("meta[property='og:image']").attr('content'),
+				desc: $("meta[property='og:description']").attr('content'),
+				bookmarks: []
+			}
+			console.log(videoData)
+			console.log("last line");
+		}
+		catch(e) {
+			console.log(e.response.body)
+		}
+			
+
+		res.send('what')
+		
+		// inserting it to database
+		// const { db } = await connectToDatabase();
+		// const videos = await db.collection("videos")
+		// const result = await videos.insertOne(videoData)
+
+		// res.send(result.insertedCount)
 	}
 }
