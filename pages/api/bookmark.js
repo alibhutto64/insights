@@ -8,13 +8,12 @@ export default async function bookmark(req,res) {
      
      const result = await videos.findOneAndUpdate({videoId: req.body.videoId}, {$push: {
         bookmarks: {
-          time: req.body.currentTime,
+          time: req.body.time,
           note: req.body.note
         }
       }} )
-    console.dir(result.modifiedCount);
     // result.forEach(video=> console.log(video))
-    res.send("hello");
+    res.send(result.value);
    }
 
    else if (req.body.action == 'delete') {

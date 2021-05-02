@@ -156,8 +156,8 @@ export default function MyDrawer(props) {
                 <Collapse in={open && clickedItemIndex==i} timeout="auto" unmountOnExit>
                   {cat.sections.map((sec, i) => (
                     <List component="div" disablePadding>
-                      <Link href={`/${cat.catName}/${sec.toLowerCase()}`}>
-                        <ListItem key={i} button className={classes.nested}>
+                      <Link key={i.toString()} href={`/${cat.catName}/${sec.toLowerCase()}`}>
+                        <ListItem button className={classes.nested}>
                             <ListItemText primary={sec} />
                         </ListItem>
                       </Link>
