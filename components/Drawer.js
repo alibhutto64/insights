@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     minWidth: "40px",
   },
+  logo: {
+    cursor: "pointer"
+  }
 }));
 
 //Categories content
@@ -131,9 +134,11 @@ export default function MyDrawer(props) {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" noWrap>
-            Insights
-          </Typography>
+          <Link href="/">
+            <Typography variant="h6" className={classes.logo} noWrap>
+              Insights
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
       <Drawer

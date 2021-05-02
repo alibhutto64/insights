@@ -44,7 +44,6 @@ export default async function metadata(req,res) {
 	  });
 		//getting all video data
 		try {
-			console.log(req.body)
 			const response = await got(`https://www.youtube.com/watch?v=${req.body.videoId}`, {
 				agent: {
 					https: tunnelingAgent
@@ -60,20 +59,16 @@ export default async function metadata(req,res) {
 				desc: $("meta[property='og:description']").attr('content'),
 				bookmarks: []
 			}
-			console.log(videoData)
 		}
 		catch(e) {
 			console.log(e.response.body)
 		}
 			
-
-		res.send('what')
-		
 		// insert to database
 		const { db } = await connectToDatabase();
 		const videos = await db.collection("videos")
 		const result = await videos.insertOne(videoData)
 
-		res.send(result)
+		res.send(result.value)
 	}
 }

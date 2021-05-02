@@ -2,6 +2,7 @@ import TextField from '@material-ui/core/TextField';
 
 
 export default function AddVideo(props) {
+  const [message, setMessage] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,12 +17,17 @@ export default function AddVideo(props) {
         videoId: e.target[0].value
       })
     })
-    console.log(response)
+
+    const status = await response.text()
+    setMessage(status)
   }
 
   return (
-    <form onSubmit={e=>{handleSubmit(e)}} style={{width: '350px', margin:"20px auto"}}>
-      <TextField id="videoLink" label={`Add ${props.cat} Video`} style={{width: '100%'}} variant="outlined" />
-    </form>
+    <div>
+      <form onSubmit={e=>{handleSubmit(e)}} style={{width: '350px', margin:"20px auto"}}>
+        <TextField id="videoLink" label={`Add ${props.cat} Video`} style={{width: '100%'}} variant="outlined" />
+      </form>
+      <h4>{message}</h4>
+    </div>
   )
 }

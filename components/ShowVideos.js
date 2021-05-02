@@ -34,7 +34,7 @@ export default function ShowVideos(props) {
                 <CardMedia
                   component="img"
                   alt="Contemplative Reptile"
-                  height="160"
+                  height="auto"
                   image={video.image}
                   title={video.title}
                 />
