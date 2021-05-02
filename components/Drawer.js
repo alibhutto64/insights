@@ -157,7 +157,7 @@ export default function MyDrawer(props) {
                   {cat.sections.map((sec, i) => (
                     <List component="div" disablePadding>
                       <Link href={`/${cat.catName}/${sec.toLowerCase()}`}>
-                        <ListItem button className={classes.nested}>
+                        <ListItem key={i} button className={classes.nested}>
                             <ListItemText primary={sec} />
                         </ListItem>
                       </Link>
