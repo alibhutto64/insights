@@ -4,6 +4,8 @@ import { connectToDatabase } from "../../util/mongodb";
 import AddVideo from '../../components/AddVideo'
 
 export default function programming({articles, videos}) {
+
+  
   return (
     <div>
       <ShowArticles articles={articles} />

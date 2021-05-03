@@ -28,13 +28,13 @@ export default function AddArticle(props) {
  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/metadata', {
+    const response = await fetch('/api/articles', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        type: "article",
+        method: "add",
         cat: cat,
         articleLink: url
       })
