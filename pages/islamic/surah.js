@@ -1,5 +1,6 @@
 import { makeStyles, Typography } from "@material-ui/core";
-import React from "react";
+import React from "react";``
+import {motion} from 'framer-motion'
 
 const UseStyles = makeStyles(()=>({
     root: {
@@ -36,12 +37,12 @@ export default function surah() {
     return (
         <div className={classes.root}>
             <header className={classes.header}>
-                <div className={classes.title}>
+                <motion.div initial={{y: -500}} animate={{y: 0}} transition={{delay: 0.5}} className={classes.title}>
                     <Typography variant="h3">Surah Al-Hijr</Typography>
                     <Typography variant="h4" >(The Rock)</Typography>
-                </div>
+                </motion.div>
 
-                <div className={classes.basic}>
+                <motion.div initial={{x: 500}} animate={{x: 0}} transition={{delay: 1}} className={classes.basic}>
                     <div>
                         <Typography variant="h5">15</Typography>
                         <Typography variant="subtitle1">Surah</Typography>
@@ -54,7 +55,7 @@ export default function surah() {
                         <Typography variant="h5">14</Typography>
                         <Typography variant="subtitle1">Juz</Typography>
                     </div>
-                </div>
+                </motion.div>
             </header>
         </div>
     )

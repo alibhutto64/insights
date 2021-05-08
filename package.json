@@ -11,6 +11,7 @@
     "@material-ui/icons": "^4.11.2",
     "cheerio": "^1.0.0-rc.5",
     "clsx": "^1.1.1",
+    "framer-motion": "^4.1.13",
     "got": "^11.8.1",
     "hpagent": "^0.1.1",
     "link-preview-js": "^2.1.3",

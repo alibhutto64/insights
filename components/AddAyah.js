@@ -83,7 +83,7 @@ export default function AddAyah() {
                         {CreateMenuItem(114)}
                     </Select>
                 </FormControl>
-                <TextField className={classes.aya} value={aya} onChange={(e) => { setAya(e.target.value) }} label="Ayah" variant="outlined" required />
+                <TextField value={aya} onChange={(e) => { setAya(e.target.value) }} label="Ayah" variant="outlined" required />
                 <TextField className={classes.note} value={note} onChange={(e) => { setNote(e.target.value) }} label="Write your note" variant="outlined" required />
                 <Button className={classes.button} type="submit" variant="contained" color="primary">submit</Button>
             </form>
